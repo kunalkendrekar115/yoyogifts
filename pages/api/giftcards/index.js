@@ -11,7 +11,13 @@ handler.get(async (req, res) => {
   let inputQuery = { ...(name && { name }), ...(category && { category }) };
 
   if (search) {
-    inputQuery.name = new RegExp(search, "i");
+    inputQuery = {
+      $or: [
+        { denominations: search },
+        { name: new RegExp(search, "i") },
+        { keywords: new RegExp(search, "i") }
+      ]
+    };
   }
 
   const records = await req.db

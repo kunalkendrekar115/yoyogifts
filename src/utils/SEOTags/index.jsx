@@ -1,6 +1,6 @@
 import Head from "next/head";
 
-function SEOTags() {
+function SEOTags(props) {
   return (
     <Head>
       <title>YoYO Gifts</title>

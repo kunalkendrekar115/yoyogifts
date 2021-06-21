@@ -23,12 +23,12 @@ const SearchFilter = () => {
 
   const router = useRouter();
 
-  const fetchGiftCards = async () => {
+  const fetchGiftCards = async (query) => {
     try {
       setGiftcards([]);
       setLoading(true);
 
-      const response = await fetch(`/api/giftcards?search=${text}`);
+      const response = await fetch(`/api/giftcards?search=${query}`);
       const giftcards = await response.json();
 
       setGiftcards(giftcards);
@@ -51,10 +51,10 @@ const SearchFilter = () => {
             value={text}
             onChange={({ target: { value } }) => {
               setText(value);
-              fetchGiftCards();
+              fetchGiftCards(value);
             }}
             style={{ color: "black" }}
-            placeholder="Search Gift Cards"
+            placeholder="Search by name, keywords, price"
             colorScheme="blackAlpha"
           />
 
