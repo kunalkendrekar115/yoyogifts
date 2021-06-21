@@ -1,4 +1,6 @@
 import { Flex, Stack, Button, Heading } from "@chakra-ui/react";
+import { faEnvelope, faKey } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 
 import FormField from "../FormFields";
@@ -14,18 +16,27 @@ const LoginFields = ({ isSubmitting }) => {
     >
       <Heading size="lg">Login</Heading>
       <Flex
-        padding="8"
+        p="5"
         boxShadow="md"
-        marginTop="5"
+        mt="5"
         bg="white"
         w="md"
         flexDirection="column"
         justify="flex-end"
       >
-        <Stack spacing={8}>
-          <FormField name="emailId" label="Email address" />
+        <Stack spacing={4}>
+          <FormField
+            name="emailId"
+            label="Email address"
+            leftAddon={<FontAwesomeIcon icon={faEnvelope} />}
+          />
 
-          <FormField name="password" label="Password" type="password" />
+          <FormField
+            name="password"
+            label="Password"
+            type="password"
+            leftAddon={<FontAwesomeIcon icon={faKey} />}
+          />
 
           <Button
             style={{ marginLeft: "auto" }}
@@ -40,10 +51,10 @@ const LoginFields = ({ isSubmitting }) => {
         </Stack>
       </Flex>
 
-      <Flex marginTop="5" justify="flex-start" w="md">
+      <Flex mt="5" justify="flex-start" w="md">
         <Heading size="sm">Don't have account?</Heading>
-        <Link href="/signup">
-          <Heading size="sm" marginLeft="2" cursor="pointer">
+        <Link href={`/signup`}>
+          <Heading size="sm" ml="2" cursor="pointer">
             Sign Up
           </Heading>
         </Link>

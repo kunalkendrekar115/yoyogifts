@@ -13,12 +13,15 @@ import {
   Divider,
   Text
 } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 import { SearchIcon, SmallCloseIcon } from "@chakra-ui/icons";
 
 const SearchFilter = () => {
   const [text, setText] = useState("");
   const [giftcards, setGiftcards] = useState([]);
   const [isLoading, setLoading] = useState(false);
+
+  const router = useRouter();
 
   const fetchGiftCards = async () => {
     try {
@@ -88,7 +91,11 @@ const SearchFilter = () => {
           >
             <List>
               {giftcards.map((giftcard) => (
-                <ListItem color="black" cursor="pointer">
+                <ListItem
+                  color="black"
+                  cursor="pointer"
+                  onClick={() => router.push(`/${giftcard.name}`)}
+                >
                   <Stack spacing="3">
                     <Text marginLeft="2">{giftcard.name}</Text>
                     <Divider color="grey.500"></Divider>

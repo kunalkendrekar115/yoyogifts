@@ -1,20 +1,27 @@
 import { Form, Formik } from "formik";
 import { signIn } from "next-auth/client";
+import { useRouter } from "next/router";
 
-import { loginSchema } from "../utils/validators";
+import { loginSchema } from "../src/utils/validators";
 import LoginFields from "../src/components/LoginFields";
 
 const Login = () => {
-  const handleSubmit = async (values, { setSubmitting }) => {
-    const body = {
-      ...values
-    };
+  const router = useRouter();
 
-    const response = await signIn("credentials", { redirect: false, ...body });
+  const { redirect } = router.query;
+
+  const handleSubmit = async (values, { setSubmitting }) => {
+    const response = await signIn("credentials", {
+      redirect: false,
+      ...values
+    });
 
     console.log(response);
-
     setSubmitting(false);
+
+    if (!response.error) {
+      router.replace(`/${redirect || ""}`);
+    }
   };
 
   return (

@@ -1,8 +1,12 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
+import { useSession } from "next-auth/client";
 import { Flex, Heading, Stack } from "@chakra-ui/layout";
-import { AppContext } from "../../utils";
+import { useRouter } from "next/router";
+
 import { Button } from "@chakra-ui/button";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
+
+import { AppContext } from "../../utils";
 import CartTable from "./CartTable";
 
 const Cart = () => {
@@ -11,14 +15,25 @@ const Cart = () => {
     updateAppData
   } = useContext(AppContext);
 
+  const [session] = useSession();
+
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
+
   const totalAmount = cart.reduce(
     (acc, { denomination }) => acc + parseInt(denomination),
     0
   );
 
   const handleSubmit = async () => {
+    if (!session) {
+      router.replace("/login?redirect=cart");
+      return;
+    }
+
     const order = { totalAmount, cart };
     try {
+      setLoading(true);
       const response = await fetch("/api/order", {
         method: "POST",
         headers: {
@@ -27,13 +42,15 @@ const Cart = () => {
         body: JSON.stringify(order)
       });
 
-      const res = await response.json();
-      if (res.status === 200) {
+      setLoading(false);
+
+      if (response.status === 200) {
         updateAppData({ cart: [] });
-        window.location.href = "/login";
+        router.replace("/");
       }
     } catch (error) {
       console.log(error);
+      setLoading(false);
     }
   };
 
@@ -61,10 +78,11 @@ const Cart = () => {
               style={{ marginLeft: "auto" }}
               rightIcon={<ArrowForwardIcon />}
               colorScheme="teal"
+              isLoading={loading}
               type="submit"
               onClick={handleSubmit}
             >
-              Proceed To Checkout
+              Checkout
             </Button>
           </Stack>
         </Flex>

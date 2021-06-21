@@ -21,7 +21,7 @@ const SignUpFields = ({ isSubmitting }) => {
         flexDirection="column"
         justify="flex-end"
       >
-        <Stack spacing={4}>
+        <Stack spacing={2}>
           <FormField name="firstName" label="First name" />
 
           <FormField name="lastName" label="Last name" />

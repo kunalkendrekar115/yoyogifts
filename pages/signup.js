@@ -1,9 +1,14 @@
 import { Formik, Form } from "formik";
+import { signIn } from "next-auth/client";
+import { useRouter } from "next/router";
 
-import { signupSchema } from "../utils/validators";
+import { signupSchema } from "../src/utils/validators";
 import SignUpFields from "../src/components/SignupFields";
 
 const SignUp = () => {
+  const router = useRouter();
+  const { redirect } = router.query;
+
   const handleSubmit = async (values, { setSubmitting }) => {
     const body = {
       ...values
@@ -17,9 +22,12 @@ const SignUp = () => {
         body: JSON.stringify(body)
       });
 
-      const res = await response.json();
-
-      console.log(res);
+      if (response.status === 200) {
+        await signIn("credentials", {
+          redirect: `/${redirect || ""}`,
+          ...values
+        });
+      }
     } catch (error) {
       console.log(error);
     }
