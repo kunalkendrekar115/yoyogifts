@@ -10,11 +10,10 @@ handler.use(middleware);
 
 handler.post(async (req, res) => {
   try {
-    const existingUser = await req.db.collection("users").findOne({ email: req.body.email });
+    const existingUser = await req.db.collection("users").findOne({ emailId: req.body.emailId });
 
     if (existingUser) {
       res.status(422).json({ error: "user already exists" });
-      req.dbClient.close();
       return;
     }
 
