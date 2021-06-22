@@ -26,9 +26,9 @@ const GiftcardReviews = ({ giftcard }) => {
       const response = await fetch("/api/giftcards/review", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "application/json"
         },
-        body: JSON.stringify(review),
+        body: JSON.stringify(review)
       });
 
       if (response.status === 200) {

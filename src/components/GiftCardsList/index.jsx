@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Flex, Box, Divider, Grid, Heading, Stack, Text } from "@chakra-ui/layout";
+import { Flex, Box, Divider, Grid, Heading, Stack } from "@chakra-ui/layout";
 import { Spinner } from "@chakra-ui/react";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -7,7 +7,7 @@ import { AppContext } from "../../utils";
 
 export default function GiftcardsList({ featuredGiftcards }) {
   const {
-    appData: { giftcards: filteredGiftCards, selectedCategory, isGiftCardsLoading },
+    appData: { giftcards: filteredGiftCards, selectedCategory, isGiftCardsLoading }
   } = useContext(AppContext);
 
   const giftcards = filteredGiftCards ? filteredGiftCards : featuredGiftcards;
@@ -15,11 +15,18 @@ export default function GiftcardsList({ featuredGiftcards }) {
   const router = useRouter();
 
   const renderGiftCarditem = (giftcard) => (
-    <Box cursor="pointer" key={giftcard.name} onClick={() => router.push(`/${giftcard.name}`)}>
+    <Box
+      cursor="pointer"
+      key={giftcard.name}
+      onClick={() => router.push(`/${giftcard.name}`)}
+      p="2"
+      boxShadow="md"
+    >
       <Image alt={giftcard.image} src={`/assets/${giftcard.image}.png`} width={250} height={150} />
-      <Text marginLeft="2" fontSize="md">
+
+      <Heading mt="2" ml="2" size="sm">
         {giftcard.name}
-      </Text>
+      </Heading>
     </Box>
   );
 
