@@ -1,12 +1,15 @@
+import { useContext } from "react";
 import { Form, Formik } from "formik";
 import { signIn } from "next-auth/client";
 import { useRouter } from "next/router";
 
 import { loginSchema } from "../src/utils/validators";
 import LoginFields from "../src/components/LoginFields";
+import { AppContext } from "../src/utils";
 
 const Login = () => {
   const router = useRouter();
+  const { showToastMessage } = useContext(AppContext);
 
   const { redirect } = router.query;
 
@@ -20,6 +23,8 @@ const Login = () => {
 
     if (!response.error) {
       router.replace(`/${redirect || ""}`);
+    } else {
+      showToastMessage({ message: response.error, status: "error" });
     }
   };
 

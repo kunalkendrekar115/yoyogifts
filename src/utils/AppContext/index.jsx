@@ -12,12 +12,21 @@ export const AppContext = createContext();
 
 export const AppContextProvider = ({ children }) => {
   const [appData, setAppData] = useState(initialValues);
+  const [toastMessage, setToastMessage] = useState({});
 
   const updateAppData = (data) => {
     setAppData((prev) => ({ ...prev, ...data }));
   };
 
-  return <AppContext.Provider value={{ appData, updateAppData }}>{children}</AppContext.Provider>;
+  const showToastMessage = (data) => {
+    setToastMessage(data);
+  };
+
+  return (
+    <AppContext.Provider value={{ appData, updateAppData, showToastMessage, toastMessage }}>
+      {children}
+    </AppContext.Provider>
+  );
 };
 
 AppContextProvider.propTypes = {

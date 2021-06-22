@@ -11,10 +11,10 @@ export async function getServerSideProps(context) {
 
   let giftcard = null;
 
+  const hostName = `${process.env.HOST_NAME}:${process.env.PORT || 3000}`;
+
   try {
-    const response = await fetch(
-      `http://localhost:3000/api/giftcards?name=${giftcardName}&limit=1`
-    );
+    const response = await fetch(`${hostName}/api/giftcards?name=${giftcardName}&limit=10`);
 
     giftcard = await response.json();
   } catch (error) {

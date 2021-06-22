@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/client";
-import { Heading, Flex, Text, Box, Badge } from "@chakra-ui/react";
+import { Heading, Flex, Text, Box, Badge, HStack } from "@chakra-ui/react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
@@ -19,7 +19,7 @@ const Header = (props) => {
   const [session] = useSession();
 
   const {
-    appData: { cart },
+    appData: { cart }
   } = useContext(AppContext);
 
   const cartCount = cart.length;
@@ -44,39 +44,41 @@ const Header = (props) => {
 
       {pathname === "/" && <CategoryFilter />}
 
-      <Flex>
-        <Link href="/" passHref={true}>
-          <Text cursor="pointer" marginLeft={8} colorScheme="whiteAlpha">
-            Dashboard
-          </Text>
-        </Link>
-
-        {!session && (
-          <Link href="login" passHref={true}>
-            <Text cursor="pointer" colorScheme="whiteAlpha">
-              Login
-            </Text>
-          </Link>
-        )}
-
-        {session && (
-          <Link href="/profile" passHref={true}>
+      <Flex pr="5">
+        <HStack spacing="8">
+          <Link href="/" passHref={true}>
             <Text cursor="pointer" marginLeft={8} colorScheme="whiteAlpha">
-              Profile
+              Dashboard
             </Text>
           </Link>
-        )}
-        {cartCount > 0 && (
-          <Flex
-            cursor="pointer"
-            marginLeft={10}
-            align="center"
-            onClick={() => router.push("/cart")}
-          >
-            <FontAwesomeIcon icon={faShoppingCart} />
-            <Badge marginLeft={1}>{cartCount}</Badge>
-          </Flex>
-        )}
+
+          {!session && (
+            <Link href="login" passHref={true}>
+              <Text cursor="pointer" colorScheme="whiteAlpha">
+                Login
+              </Text>
+            </Link>
+          )}
+
+          {session && (
+            <Link href="/profile" passHref={true}>
+              <Text cursor="pointer" marginLeft={8} colorScheme="whiteAlpha">
+                Profile
+              </Text>
+            </Link>
+          )}
+          {cartCount > 0 && (
+            <Flex
+              cursor="pointer"
+              marginLeft={10}
+              align="center"
+              onClick={() => router.push("/cart")}
+            >
+              <FontAwesomeIcon icon={faShoppingCart} />
+              <Badge marginLeft={1}>{cartCount}</Badge>
+            </Flex>
+          )}
+        </HStack>
       </Flex>
     </Flex>
   );

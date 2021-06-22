@@ -1,23 +1,24 @@
-import { useContext } from 'react';
-import { Badge, Box, Flex, Heading, HStack, Text } from '@chakra-ui/layout';
-import { Spinner } from '@chakra-ui/spinner';
-import Image from 'next/image';
+import { useContext } from "react";
+import { Badge, Box, Flex, Heading, HStack, Text } from "@chakra-ui/layout";
+import { Spinner } from "@chakra-ui/spinner";
+import Image from "next/image";
 
-import { AppContext } from '../../utils';
-import GiftcardFields from './GiftcardsFields';
-import GiftcardReviews from './GiftcardReviews';
+import { AppContext } from "../../utils";
+import GiftcardFields from "./GiftcardsFields";
+import GiftcardReviews from "./GiftcardReviews";
 
 const GiftCard = ({ giftcard }) => {
-  const { appData, updateAppData } = useContext(AppContext);
+  const { appData, updateAppData, showToastMessage } = useContext(AppContext);
 
   const addGiftCardToCart = (values, { resetForm }) => {
     const { cart } = appData;
 
-    console.log(cart);
     const updatedCart = [...cart, { ...giftcard, ...values }];
 
     updateAppData({ cart: updatedCart });
     resetForm();
+
+    showToastMessage({ message: `${giftcard.name} is added to the cart` });
   };
 
   if (!giftcard) return <Spinner />;

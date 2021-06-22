@@ -7,12 +7,14 @@ import Header from "../src/components/Header";
 import "../styles/globals.css";
 import { AppContextProvider, ChakraUIContainer } from "../src/utils";
 import SEOTags from "../src/utils/SEOTags";
+import ToastMessage from "../src/utils/ToastMessage";
 
 function MyApp({ Component, pageProps }) {
   return (
     <AppContextProvider>
       <AuthProvider session={pageProps.session}>
         <ChakraUIContainer>
+          <ToastMessage></ToastMessage>
           <SEOTags />
           <Header />
           <Component {...pageProps} />

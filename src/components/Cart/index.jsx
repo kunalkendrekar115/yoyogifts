@@ -12,7 +12,8 @@ import CartTable from "./CartTable";
 const Cart = () => {
   const {
     appData: { cart },
-    updateAppData
+    updateAppData,
+    showToastMessage
   } = useContext(AppContext);
 
   const [session] = useSession();
@@ -20,10 +21,7 @@ const Cart = () => {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-  const totalAmount = cart.reduce(
-    (acc, { denomination }) => acc + parseInt(denomination),
-    0
-  );
+  const totalAmount = cart.reduce((acc, { denomination }) => acc + parseInt(denomination), 0);
 
   const handleSubmit = async () => {
     if (!session) {
@@ -46,6 +44,7 @@ const Cart = () => {
 
       if (response.status === 200) {
         updateAppData({ cart: [] });
+        showToastMessage({ message: "Order placed successfully", status: "success" });
         router.replace("/");
       }
     } catch (error) {

@@ -6,8 +6,11 @@ export default function Home({ giftcards }) {
 
 export async function getStaticProps() {
   let giftcards = [];
+
+  const hostName = `${process.env.HOST_NAME}:${process.env.PORT || 3000}`;
+
   try {
-    const response = await fetch("http://localhost:3000/api/giftcards?limit=10");
+    const response = await fetch(`${hostName}/api/giftcards?limit=10`);
 
     giftcards = await response.json();
   } catch (error) {
