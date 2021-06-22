@@ -1,7 +1,7 @@
 // .prettierrc.js
 module.exports = {
   semi: true,
-  trailingComma: 'es5',
+  trailingComma: "none",
   printWidth: 100,
   tabWidth: 2,
   useTabs: false,

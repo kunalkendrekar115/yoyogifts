@@ -13,7 +13,7 @@ const Login = () => {
   const handleSubmit = async (values, { setSubmitting }) => {
     const response = await signIn("credentials", {
       redirect: false,
-      ...values,
+      ...values
     });
 
     setSubmitting(false);

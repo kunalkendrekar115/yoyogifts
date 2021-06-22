@@ -11,21 +11,21 @@ const SignUp = () => {
 
   const handleSubmit = async (values, { setSubmitting }) => {
     const body = {
-      ...values,
+      ...values
     };
     try {
       const response = await fetch("/api/signup", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "application/json"
         },
-        body: JSON.stringify(body),
+        body: JSON.stringify(body)
       });
 
       if (response.status === 200) {
         await signIn("credentials", {
           redirect: `/${redirect || ""}`,
-          ...values,
+          ...values
         });
       }
     } catch (error) {

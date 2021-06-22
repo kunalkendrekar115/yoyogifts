@@ -22,7 +22,6 @@
     "framer-motion": "^4.1.17",
     "moment": "^2.29.1",
     "mongodb": "^3.6.8",
-    "mongoose": "^5.12.13",
     "next": "10.2.3",
     "next-auth": "^3.27.0",
     "next-connect": "^0.10.1",

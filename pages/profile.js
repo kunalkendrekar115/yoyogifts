@@ -41,13 +41,7 @@ const ProfilePage = () => {
   return (
     <Box padding="10">
       {loading && <Heading>Loading...</Heading>}
-      {user && (
-        <Profile
-          user={user}
-          loadingSignout={loadingSignout}
-          signOut={handleSignOut}
-        />
-      )}
+      {user && <Profile user={user} loadingSignout={loadingSignout} signOut={handleSignOut} />}
     </Box>
   );
 };

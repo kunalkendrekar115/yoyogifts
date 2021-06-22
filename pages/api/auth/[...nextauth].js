@@ -18,15 +18,10 @@ const authOptions = {
     Providers.Credentials({
       async authorize(credentials, req) {
         try {
-          const user = await req.db
-            .collection("users")
-            .findOne({ emailId: credentials.emailId });
+          const user = await req.db.collection("users").findOne({ emailId: credentials.emailId });
 
           if (user) {
-            const verified = bcrypt.compareSync(
-              credentials.password,
-              user.password
-            );
+            const verified = bcrypt.compareSync(credentials.password, user.password);
             if (verified) return { email: user.emailId, id: user.id };
 
             throw new Error("Invalid Password");

@@ -1,4 +1,4 @@
-import GiftCard from '../src/components/GiftCard';
+import GiftCard from "../src/components/GiftCard";
 
 const GiftcardPage = ({ giftcard }) => {
   return <GiftCard giftcard={giftcard} />;
@@ -23,11 +23,11 @@ export async function getServerSideProps(context) {
 
   if (giftcard && giftcard.length > 0) {
     return {
-      props: { giftcard: giftcard[0] },
+      props: { giftcard: giftcard[0] }
     };
   }
 
   return {
-    notFound: true,
+    notFound: true
   };
 }
