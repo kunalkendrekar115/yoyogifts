@@ -1,15 +1,13 @@
-import { useContext } from "react";
-import { Badge, Box, Flex, Heading, HStack, Text } from "@chakra-ui/layout";
-import { Spinner } from "@chakra-ui/spinner";
-import Image from "next/image";
+import { useContext } from 'react';
+import { Badge, Box, Flex, Heading, HStack, Text } from '@chakra-ui/layout';
+import { Spinner } from '@chakra-ui/spinner';
+import Image from 'next/image';
 
-import { AppContext } from "../../utils";
-import GiftcardFields from "./GiftcardsFields";
-import GiftcardReviews from "./GiftcardReviews";
+import { AppContext } from '../../utils';
+import GiftcardFields from './GiftcardsFields';
+import GiftcardReviews from './GiftcardReviews';
 
 const GiftCard = ({ giftcard }) => {
-  if (!giftcard) return <Spinner />;
-
   const { appData, updateAppData } = useContext(AppContext);
 
   const addGiftCardToCart = (values, { resetForm }) => {
@@ -21,6 +19,8 @@ const GiftCard = ({ giftcard }) => {
     updateAppData({ cart: updatedCart });
     resetForm();
   };
+
+  if (!giftcard) return <Spinner />;
 
   return (
     <Box>
@@ -39,25 +39,18 @@ const GiftCard = ({ giftcard }) => {
 
           <HStack spacing="4" mt="4">
             {giftcard.keywords &&
-              giftcard.keywords.map((keyword) => (
-                <Badge p="1">{keyword}</Badge>
+              giftcard.keywords.map((keyword, index) => (
+                <Badge p="1" key={`key-${index}`}>
+                  {keyword}
+                </Badge>
               ))}
           </HStack>
         </Box>
       </Flex>
 
-      <Flex
-        mt="5"
-        bg="lightgrey"
-        padding="5"
-        justify="space-around"
-        align="flex-start"
-      >
+      <Flex mt="5" bg="lightgrey" padding="5" justify="space-around" align="flex-start">
         <GiftcardReviews giftcard={giftcard} />
-        <GiftcardFields
-          giftcard={giftcard}
-          addGiftCardToCart={addGiftCardToCart}
-        />
+        <GiftcardFields giftcard={giftcard} addGiftCardToCart={addGiftCardToCart} />
       </Flex>
     </Box>
   );

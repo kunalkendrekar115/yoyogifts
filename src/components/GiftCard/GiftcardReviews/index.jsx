@@ -16,7 +16,7 @@ const GiftcardReviews = ({ giftcard }) => {
 
   useEffect(() => {
     if (giftcard.reviews) setReviews(giftcard.reviews);
-  }, []);
+  }, [giftcard.reviews]);
 
   const postReview = async () => {
     const review = { reviewText, name: giftcard.name };
@@ -26,9 +26,9 @@ const GiftcardReviews = ({ giftcard }) => {
       const response = await fetch("/api/giftcards/review", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify(review)
+        body: JSON.stringify(review),
       });
 
       if (response.status === 200) {
@@ -90,13 +90,12 @@ const GiftcardReviews = ({ giftcard }) => {
       </Flex>
 
       <Heading size="md" mt="5">
-        {reviews.length === 0
-          ? "No Reviews for this brand"
-          : "Featured Reviews"}
+        {reviews.length === 0 ? "No Reviews for this brand" : "Featured Reviews"}
       </Heading>
 
-      {reviews.map((review) => (
+      {reviews.map((review, index) => (
         <Flex
+          key={`reviewKey-${index}`}
           w="100%"
           direction="column"
           marginTop="5"
@@ -107,9 +106,9 @@ const GiftcardReviews = ({ giftcard }) => {
           <Stack spacing="5">
             <Flex justify="space-between">
               <Heading size="xs">{review.name}</Heading>
-              <Heading size="xs">{`Review Date: ${moment(
-                review.reviewDate
-              ).format("DD-MMM-YYYY")}`}</Heading>
+              <Heading size="xs">{`Review Date: ${moment(review.reviewDate).format(
+                "DD-MMM-YYYY"
+              )}`}</Heading>
             </Flex>
 
             <Text>{review.reviewText}</Text>

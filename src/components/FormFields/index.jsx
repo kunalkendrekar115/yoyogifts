@@ -1,9 +1,4 @@
-import {
-  FormControl,
-  FormErrorMessage,
-  FormLabel,
-  FormHelperText
-} from "@chakra-ui/form-control";
+import { FormControl, FormErrorMessage, FormLabel, FormHelperText } from "@chakra-ui/form-control";
 import { Select } from "@chakra-ui/react";
 import { Input, InputGroup, InputLeftAddon } from "@chakra-ui/input";
 import { useField } from "formik";
@@ -18,8 +13,10 @@ const FormField = (props) => {
       <FormControl isInvalid={meta.error && meta.touched}>
         <FormLabel htmlFor={name}>{label}</FormLabel>
         <Select {...field} {...props} borderColor="grey" placeholder={label}>
-          {props.items.map((item) => (
-            <option value={item}>{props.leftAddon + " " + item}</option>
+          {props.items.map((item, index) => (
+            <option key={`key-${index}`} value={item}>
+              {props.leftAddon + " " + item}
+            </option>
           ))}
         </Select>
         <FormErrorMessage>{meta.error}</FormErrorMessage>
@@ -31,11 +28,7 @@ const FormField = (props) => {
       <FormLabel htmlFor={name}>{label}</FormLabel>
       <InputGroup>
         {props.leftAddon && (
-          <InputLeftAddon
-            borderColor="grey"
-            pointerEvents="none"
-            children={props.leftAddon}
-          />
+          <InputLeftAddon borderColor="grey" pointerEvents="none" children={props.leftAddon} />
         )}
         <Input {...field} {...props} borderColor="grey" />
       </InputGroup>

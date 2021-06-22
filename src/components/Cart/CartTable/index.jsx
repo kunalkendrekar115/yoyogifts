@@ -1,6 +1,6 @@
-import { IconButton } from "@chakra-ui/button";
-import { DeleteIcon } from "@chakra-ui/icons";
-import { Table, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/table";
+import { IconButton } from '@chakra-ui/button';
+import { DeleteIcon } from '@chakra-ui/icons';
+import { Table, Tbody, Td, Th, Thead, Tr } from '@chakra-ui/table';
 
 const CartTable = ({ cart, onDelete }) => (
   <Table>
@@ -12,7 +12,7 @@ const CartTable = ({ cart, onDelete }) => (
     </Thead>
     <Tbody>
       {cart.map((item, index) => (
-        <Tr>
+        <Tr key={`key-${index}`}>
           <Td>{index + 1}</Td>
           <Td>{item.name}</Td>
           <Td>{item.recipientEmail}</Td>

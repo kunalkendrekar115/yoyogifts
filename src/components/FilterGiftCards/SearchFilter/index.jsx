@@ -11,7 +11,7 @@ import {
   List,
   ListItem,
   Divider,
-  Text
+  Text,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { SearchIcon, SmallCloseIcon } from "@chakra-ui/icons";
@@ -90,8 +90,9 @@ const SearchFilter = () => {
             top="40px"
           >
             <List>
-              {giftcards.map((giftcard) => (
+              {giftcards.map((giftcard, index) => (
                 <ListItem
+                  key={`key-${index}`}
                   color="black"
                   cursor="pointer"
                   onClick={() => router.push(`/${giftcard.name}`)}

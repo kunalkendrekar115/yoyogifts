@@ -19,7 +19,7 @@ const Header = (props) => {
   const [session] = useSession();
 
   const {
-    appData: { cart }
+    appData: { cart },
   } = useContext(AppContext);
 
   const cartCount = cart.length;
@@ -34,7 +34,7 @@ const Header = (props) => {
       color="white"
       {...props}
     >
-      <Link href="/">
+      <Link href="/" passHref={true}>
         <Heading cursor="pointer" as="h2" size="lg" mr="10">
           YoYoGifts
         </Heading>
@@ -45,8 +45,14 @@ const Header = (props) => {
       {pathname === "/" && <CategoryFilter />}
 
       <Flex>
+        <Link href="/" passHref={true}>
+          <Text cursor="pointer" marginLeft={8} colorScheme="whiteAlpha">
+            Dashboard
+          </Text>
+        </Link>
+
         {!session && (
-          <Link href="login">
+          <Link href="login" passHref={true}>
             <Text cursor="pointer" colorScheme="whiteAlpha">
               Login
             </Text>
@@ -54,7 +60,7 @@ const Header = (props) => {
         )}
 
         {session && (
-          <Link href="/profile">
+          <Link href="/profile" passHref={true}>
             <Text cursor="pointer" marginLeft={8} colorScheme="whiteAlpha">
               Profile
             </Text>

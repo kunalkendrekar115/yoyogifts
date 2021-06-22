@@ -5,8 +5,9 @@ import moment from "moment";
 
 const OrdersTable = ({ orders }) => (
   <Box>
-    {orders.map((order) => (
+    {orders.map((order, index) => (
       <Flex
+        key={`myOrders-${index}`}
         w="100%"
         direction="column"
         marginTop="5"
@@ -18,17 +19,15 @@ const OrdersTable = ({ orders }) => (
             <Heading size="sm">{`OrderDate: ${moment(order.orderDate).format(
               "DD-MMM-YYYY"
             )}`}</Heading>
-            <Heading size="sm">
-              Total Amount: &#8377; {order.totalAmount}
-            </Heading>
+            <Heading size="sm">Total Amount: &#8377; {order.totalAmount}</Heading>
           </Flex>
           <Box>
             <Heading marginBottom="4" size="sm">
               Order Summary:
             </Heading>
 
-            {order.cart.map((cart) => (
-              <Flex marginTop="2">
+            {order.cart.map((cart, index) => (
+              <Flex key={`myCart-${index}`} marginTop="2">
                 <HStack spacing="10">
                   <Flex align="center">
                     <FontAwesomeIcon style={{ marginRight: 8 }} icon={faGift} />
@@ -43,10 +42,7 @@ const OrdersTable = ({ orders }) => (
                   </Flex>
 
                   <Flex align="center">
-                    <FontAwesomeIcon
-                      style={{ marginRight: 8 }}
-                      icon={faEnvelope}
-                    />
+                    <FontAwesomeIcon style={{ marginRight: 8 }} icon={faEnvelope} />
                     <Text> {cart.recipientEmail}</Text>
                   </Flex>
                 </HStack>
