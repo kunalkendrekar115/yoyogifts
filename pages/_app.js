@@ -5,15 +5,15 @@ import { config } from "@fortawesome/fontawesome-svg-core";
 config.autoAddCss = false;
 
 import Header from "../src/components/Header";
-import "../styles/globals.css";
 import { AppContextProvider, ChakraUIContainer, ToastMessage, SEOTags } from "../src/utils";
+import "../styles/globals.css";
 
-function MyApp({ Component, pageProps }) {
+function App({ Component, pageProps }) {
   return (
     <AppContextProvider>
       <AuthProvider session={pageProps.session}>
         <ChakraUIContainer>
-          <ToastMessage></ToastMessage>
+          <ToastMessage />
           <SEOTags />
           <Header />
           <Box mt="60px">
@@ -25,4 +25,4 @@ function MyApp({ Component, pageProps }) {
   );
 }
 
-export default MyApp;
+export default App;
