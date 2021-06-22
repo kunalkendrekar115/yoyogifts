@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { useSession } from "next-auth/client";
 import { Flex, Heading, Stack } from "@chakra-ui/layout";
 import { useRouter } from "next/router";
@@ -16,20 +16,25 @@ const Cart = () => {
     showToastMessage
   } = useContext(AppContext);
 
-  const [session] = useSession();
+  const [session, loadingUserSession] = useSession();
+
+  console.log(loadingUserSession);
 
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
+  const { placeOrder } = router.query;
+
   const totalAmount = cart.reduce((acc, { denomination }) => acc + parseInt(denomination), 0);
 
-  const handleSubmit = async () => {
+  const createOrder = async () => {
     if (!session) {
       router.replace("/login?redirect=cart");
       return;
     }
 
     const order = { totalAmount, cart };
+
     try {
       setLoading(true);
       const response = await fetch("/api/order", {
@@ -53,12 +58,20 @@ const Cart = () => {
     }
   };
 
+  useEffect(() => {
+    if (placeOrder && session && cart.length > 0) {
+      createOrder();
+    }
+  }, [placeOrder, session]);
+
   const handleDelete = (index) => {
     console.log(index);
     updateAppData({
       cart: [...cart.slice(0, index), ...cart.slice(index + 1, cart.length)]
     });
   };
+
+  if (loadingUserSession) return <Heading p="10">Please wait...</Heading>;
 
   return (
     <Flex padding="10">
@@ -79,7 +92,7 @@ const Cart = () => {
               colorScheme="teal"
               isLoading={loading}
               type="submit"
-              onClick={handleSubmit}
+              onClick={createOrder}
             >
               Checkout
             </Button>

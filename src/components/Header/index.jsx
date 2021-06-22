@@ -11,6 +11,8 @@ import { AppContext } from "../../utils/AppContext";
 import CategoryFilter from "../FilterGiftCards/CategoryFilter";
 import SearchFilter from "../FilterGiftCards/SearchFilter";
 
+import { header } from "./index.module.css";
+
 const Header = (props) => {
   const router = useRouter();
 
@@ -25,15 +27,7 @@ const Header = (props) => {
   const cartCount = cart.length;
 
   return (
-    <Flex
-      as="nav"
-      align="center"
-      justify="space-between"
-      padding={3}
-      bg="primary.1"
-      color="white"
-      {...props}
-    >
+    <Box as="nav" className={header} h="60px" p="4">
       <Link href="/" passHref={true}>
         <Heading cursor="pointer" as="h2" size="lg" mr="10">
           YoYoGifts
@@ -80,7 +74,7 @@ const Header = (props) => {
           )}
         </HStack>
       </Flex>
-    </Flex>
+    </Box>
   );
 };
 

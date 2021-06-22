@@ -1,13 +1,12 @@
 import { Provider as AuthProvider } from "next-auth/client";
+import { Box } from "@chakra-ui/react";
 import "@fortawesome/fontawesome-svg-core/styles.css"; // import Font Awesome CSS
 import { config } from "@fortawesome/fontawesome-svg-core";
 config.autoAddCss = false;
 
 import Header from "../src/components/Header";
 import "../styles/globals.css";
-import { AppContextProvider, ChakraUIContainer } from "../src/utils";
-import SEOTags from "../src/utils/SEOTags";
-import ToastMessage from "../src/utils/ToastMessage";
+import { AppContextProvider, ChakraUIContainer, ToastMessage, SEOTags } from "../src/utils";
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -17,7 +16,9 @@ function MyApp({ Component, pageProps }) {
           <ToastMessage></ToastMessage>
           <SEOTags />
           <Header />
-          <Component {...pageProps} />
+          <Box mt="60px">
+            <Component {...pageProps} />
+          </Box>
         </ChakraUIContainer>
       </AuthProvider>
     </AppContextProvider>

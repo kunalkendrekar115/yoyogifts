@@ -22,7 +22,12 @@ const Login = () => {
     setSubmitting(false);
 
     if (!response.error) {
-      router.replace(`/${redirect || ""}`);
+      let path = null;
+
+      if (redirect === "cart") path = `/cart?placeOrder=true`;
+      else path = `/${redirect || ""}`;
+
+      router.replace(path);
     } else {
       showToastMessage({ message: response.error, status: "error" });
     }
