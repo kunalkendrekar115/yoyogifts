@@ -8,7 +8,7 @@ function SEOTags({ giftcard }) {
   const imageURL = `https://yoyogifts.vercel.app/${image}`;
   return (
     <Head>
-      <title>YoYO Gifts</title>
+      <title>{title}</title>
       <meta property="image" content={imageURL}></meta>
       <meta property="description" content={description} key="title" />
 
