@@ -7,7 +7,7 @@ export default function Home({ giftcards }) {
 export async function getStaticProps() {
   let giftcards = [];
 
-  const hostName = `${process.env.HOST_NAME}:${process.env.PORT || 3000}`;
+  const hostName = `https://yoyogifts.vercel.app`;
 
   try {
     const response = await fetch(`${hostName}/api/giftcards?limit=10`);

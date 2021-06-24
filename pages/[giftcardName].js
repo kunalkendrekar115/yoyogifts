@@ -11,7 +11,7 @@ export async function getServerSideProps(context) {
 
   let giftcard = null;
 
-  const hostName = `${process.env.HOST_NAME}:${process.env.PORT || 3000}`;
+  const hostName = `https://yoyogifts.vercel.app`;
 
   try {
     const response = await fetch(`${hostName}/api/giftcards?name=${giftcardName}&limit=10`);
