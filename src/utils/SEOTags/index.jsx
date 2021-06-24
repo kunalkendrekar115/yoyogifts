@@ -1,9 +1,9 @@
 import Head from "next/head";
 
 function SEOTags({ giftcard }) {
-  const title = "YoYO Gifts" || giftcard?.name;
-  const description = "Purchase & Send Giftcards to email" || giftcard?.description;
-  const image = giftcard?.image ? `${giftcard.image}.png` : "favicon.ico";
+  const title = giftcard?.name || "YoYO Gifts";
+  const description = giftcard?.description || "Purchase & Send Giftcards to email";
+  const image = giftcard?.image ? `assets/${giftcard.image}.png` : "favicon.ico";
 
   const imageURL = `https://yoyogifts.vercel.app/${image}`;
   return (
