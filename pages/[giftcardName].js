@@ -1,6 +1,7 @@
 import GiftCard from "../src/components/GiftCard";
 
 const GiftcardPage = ({ giftcard }) => {
+  console.log(process.env.HOST_NAME);
   return <GiftCard giftcard={giftcard} />;
 };
 

@@ -14,7 +14,7 @@ function App({ Component, pageProps }) {
       <AuthProvider session={pageProps.session}>
         <ChakraUIContainer>
           <ToastMessage />
-          <SEOTags />
+          <SEOTags giftcard={pageProps?.giftcard} />
           <Header />
           <Box mt="60px">
             <Component {...pageProps} />
